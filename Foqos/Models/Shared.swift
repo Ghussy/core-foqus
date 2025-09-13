@@ -3,7 +3,7 @@ import Foundation
 
 enum SharedData {
   private static let suite = UserDefaults(
-    suiteName: "group.dev.ambitionsoftware.foqos"
+    suiteName: "group.com.c0re.foqos"
   )!
 
   // MARK: – Keys
@@ -35,6 +35,7 @@ enum SharedData {
     var physicalUnblockQRCodeId: String?
 
     var schedule: BlockedProfileSchedule?
+    var deeplinkURL: String?
   }
 
   // MARK: – Serializable snapshot of a session (no profile object)

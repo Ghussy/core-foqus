@@ -14,7 +14,8 @@ private let container: ModelContainer = {
   do {
     return try ModelContainer(
       for: BlockedProfileSession.self,
-      BlockedProfiles.self
+      BlockedProfiles.self,
+      CachedProfile.self
     )
   } catch {
     fatalError("Couldn’t create ModelContainer: \(error)")
@@ -48,7 +49,7 @@ struct foqosApp: App {
 
   var body: some Scene {
     WindowGroup {
-      HomeView()
+      AppView()
         .onOpenURL { url in
           handleUniversalLink(url)
         }

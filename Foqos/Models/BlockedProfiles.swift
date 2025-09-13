@@ -34,6 +34,8 @@ class BlockedProfiles {
     return DeviceActivityCenterUtil.getActiveDeviceActivity(for: self)
   }
 
+  var deeplinkURL: String? = nil
+
   init(
     id: UUID = UUID(),
     name: String,
@@ -51,7 +53,8 @@ class BlockedProfiles {
     domains: [String]? = nil,
     physicalUnblockNFCTagId: String? = nil,
     physicalUnblockQRCodeId: String? = nil,
-    schedule: BlockedProfileSchedule? = nil
+    schedule: BlockedProfileSchedule? = nil,
+    deeplinkURL: String? = nil
   ) {
     self.id = id
     self.name = name
@@ -73,6 +76,7 @@ class BlockedProfiles {
     self.physicalUnblockNFCTagId = physicalUnblockNFCTagId
     self.physicalUnblockQRCodeId = physicalUnblockQRCodeId
     self.schedule = schedule
+    self.deeplinkURL = deeplinkURL
   }
 
   static func fetchProfiles(in context: ModelContext) throws
@@ -120,7 +124,8 @@ class BlockedProfiles {
     domains: [String]? = nil,
     physicalUnblockNFCTagId: String? = nil,
     physicalUnblockQRCodeId: String? = nil,
-    schedule: BlockedProfileSchedule? = nil
+    schedule: BlockedProfileSchedule? = nil,
+    deeplinkURL: String? = nil
   ) throws -> BlockedProfiles {
     if let newName = name {
       profile.name = newName
@@ -164,6 +169,10 @@ class BlockedProfiles {
 
     if let newSchedule = schedule {
       profile.schedule = newSchedule
+    }
+
+    if let newDeeplinkURL = deeplinkURL {
+      profile.deeplinkURL = newDeeplinkURL
     }
 
     // Values can be nil when removed
@@ -239,7 +248,8 @@ class BlockedProfiles {
       domains: profile.domains,
       physicalUnblockNFCTagId: profile.physicalUnblockNFCTagId,
       physicalUnblockQRCodeId: profile.physicalUnblockQRCodeId,
-      schedule: profile.schedule
+      schedule: profile.schedule,
+      deeplinkURL: profile.deeplinkURL
     )
   }
 
@@ -287,7 +297,8 @@ class BlockedProfiles {
     domains: [String]? = nil,
     physicalUnblockNFCTagId: String? = nil,
     physicalUnblockQRCodeId: String? = nil,
-    schedule: BlockedProfileSchedule? = nil
+    schedule: BlockedProfileSchedule? = nil,
+    deeplinkURL: String? = nil
   ) throws -> BlockedProfiles {
     let profileOrder = getNextOrder(in: context)
 
@@ -305,6 +316,7 @@ class BlockedProfiles {
       domains: domains,
       physicalUnblockNFCTagId: physicalUnblockNFCTagId,
       physicalUnblockQRCodeId: physicalUnblockQRCodeId,
+      deeplinkURL: deeplinkURL
     )
 
     if let schedule = schedule {
@@ -339,7 +351,8 @@ class BlockedProfiles {
       domains: source.domains,
       physicalUnblockNFCTagId: source.physicalUnblockNFCTagId,
       physicalUnblockQRCodeId: source.physicalUnblockQRCodeId,
-      schedule: source.schedule
+      schedule: source.schedule,
+      deeplinkURL: source.deeplinkURL
     )
 
     context.insert(cloned)

@@ -36,7 +36,7 @@ struct BlockedProfileCarousel: View {
   }
 
   private var actionButtonIcon: String {
-    return isBlocking ? "exclamationmark.triangle.fill" : "person.crop.circle"
+    return isBlocking ? "exclamationmark.triangle.fill" : "gearshape.fill"
   }
 
   private var actionButtonAction: () -> Void {

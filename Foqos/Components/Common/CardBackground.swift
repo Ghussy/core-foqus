@@ -3,6 +3,8 @@ import SwiftUI
 struct CardBackground: View {
   var isActive: Bool = false
   var customColor: Color? = nil
+  var centered: Bool = false
+  var blurRadius: CGFloat = 15
 
   // Metaball blob specs (randomized once for organic motion)
   @State private var blobs: [BlobSpec] = Self.makeBlobs(count: 5)
@@ -19,11 +21,10 @@ struct CardBackground: View {
 
   // Select a color based on custom color or active state
   private var cardColor: Color {
-    if isActive {
-      return CardBackground.activeBlobColor
-    }
-
-    return customColor ?? CardBackground.inactiveBlobColor
+    // Prefer the provided custom color (from settings) regardless of active state,
+    // so animated and static variants can both be tinted.
+    if let custom = customColor { return custom }
+    return isActive ? CardBackground.activeBlobColor : CardBackground.inactiveBlobColor
   }
 
   var body: some View {
@@ -41,17 +42,18 @@ struct CardBackground: View {
                   .fill(cardColor)
                   .mask(MetaballMaskView(blobs: blobs, t: t))
                   .opacity(0.9)
+                  .compositingGroup()
               }
             } else {
               // Default single circle for inactive state
               Circle()
                 .fill(cardColor.opacity(0.5))
-                .frame(width: geometry.size.width * 0.5, height: geometry.size.width * 0.5)
+                .frame(width: geometry.size.width * 0.6, height: geometry.size.width * 0.6)
                 .position(
-                  x: geometry.size.width * 0.9,
+                  x: centered ? geometry.size.width / 2 : geometry.size.width * 0.9,
                   y: geometry.size.height / 2
                 )
-                .blur(radius: 15)
+                .blur(radius: blurRadius)
             }
           }
         }
@@ -132,8 +134,9 @@ struct CardBackground: View {
 
     var body: some View {
       Canvas { context, size in
-        context.addFilter(.alphaThreshold(min: 0.45))
-        context.addFilter(.blur(radius: 28))
+        // Blur first to soften and join blobs, then threshold to create the gooey effect
+        context.addFilter(.blur(radius: 40))
+        context.addFilter(.alphaThreshold(min: 0.55))
 
         context.drawLayer { layer in
           for blob in blobs {

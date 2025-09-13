@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		124088842E6D122C00530B3B /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 124088832E6D122C00530B3B /* Auth */; };
+		124088862E6D122C00530B3B /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 124088852E6D122C00530B3B /* Functions */; };
+		124088882E6D122C00530B3B /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 124088872E6D122C00530B3B /* PostgREST */; };
+		1240888A2E6D122C00530B3B /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 124088892E6D122C00530B3B /* Realtime */; };
+		1240888C2E6D122C00530B3B /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 1240888B2E6D122C00530B3B /* Storage */; };
+		1240888E2E6D141500530B3B /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1240888D2E6D141500530B3B /* Supabase */; };
+		124088C92E74E59C00530B3B /* RealtimeAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 124088C82E74E59C00530B3B /* RealtimeAPI */; };
 		8017130B2DE6C78C00B77FE1 /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DBF6132CB776D100EEA8A6 /* DeviceActivity.framework */; };
 		801713132DE6C78C00B77FE1 /* FoqosDeviceMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8017130A2DE6C78C00B77FE1 /* FoqosDeviceMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		803989B32CCC06D600E87F57 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803989B22CCC06D600E87F57 /* StoreKit.framework */; };
@@ -195,6 +202,13 @@
 			files = (
 				80F674AB2D6185510056977F /* CodeScanner in Frameworks */,
 				803989B32CCC06D600E87F57 /* StoreKit.framework in Frameworks */,
+				1240888C2E6D122C00530B3B /* Storage in Frameworks */,
+				124088862E6D122C00530B3B /* Functions in Frameworks */,
+				1240888E2E6D141500530B3B /* Supabase in Frameworks */,
+				124088C92E74E59C00530B3B /* RealtimeAPI in Frameworks */,
+				1240888A2E6D122C00530B3B /* Realtime in Frameworks */,
+				124088842E6D122C00530B3B /* Auth in Frameworks */,
+				124088882E6D122C00530B3B /* PostgREST in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +332,13 @@
 			name = foqos;
 			packageProductDependencies = (
 				80F674AA2D6185510056977F /* CodeScanner */,
+				124088832E6D122C00530B3B /* Auth */,
+				124088852E6D122C00530B3B /* Functions */,
+				124088872E6D122C00530B3B /* PostgREST */,
+				124088892E6D122C00530B3B /* Realtime */,
+				1240888B2E6D122C00530B3B /* Storage */,
+				1240888D2E6D141500530B3B /* Supabase */,
+				124088C82E74E59C00530B3B /* RealtimeAPI */,
 			);
 			productName = foqos;
 			productReference = 801B20952CB363A10073E9E2 /* foqos.app */;
@@ -450,6 +471,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				8021D2462D61837E00A92114 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				124088C72E74E59C00530B3B /* XCRemoteSwiftPackageReference "swift-realtime-openai" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 801B20962CB363A10073E9E2 /* Products */;
@@ -785,7 +808,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = foqos/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Foqos;
+				INFOPLIST_KEY_CFBundleDisplayName = "C0RE Focus";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "This app uses NFC to scan tags for item identification.";
@@ -800,7 +823,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -834,7 +857,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = foqos/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Foqos;
+				INFOPLIST_KEY_CFBundleDisplayName = "C0RE Focus";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NFCReaderUsageDescription = "This app uses NFC to scan tags for item identification.";
@@ -849,7 +872,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
@@ -1147,6 +1170,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+		124088C72E74E59C00530B3B /* XCRemoteSwiftPackageReference "swift-realtime-openai" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/m1guelpf/swift-realtime-openai.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		8021D2462D61837E00A92114 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -1158,6 +1197,41 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		124088832E6D122C00530B3B /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		124088852E6D122C00530B3B /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		124088872E6D122C00530B3B /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		124088892E6D122C00530B3B /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		1240888B2E6D122C00530B3B /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		1240888D2E6D141500530B3B /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		124088C82E74E59C00530B3B /* RealtimeAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088C72E74E59C00530B3B /* XCRemoteSwiftPackageReference "swift-realtime-openai" */;
+			productName = RealtimeAPI;
+		};
 		80F674AA2D6185510056977F /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8021D2462D61837E00A92114 /* XCRemoteSwiftPackageReference "CodeScanner" */;

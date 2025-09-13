@@ -12,7 +12,7 @@ struct IntroView: View {
             .font(.system(size: 40))
             .foregroundColor(.purple)
 
-          Text("Welcome\nto Foqos")
+          Text("Welcome\nto C0re")
             .font(.largeTitle)
             .fontWeight(.bold)
             .multilineTextAlignment(.center)

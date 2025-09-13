@@ -27,8 +27,8 @@ struct HomeView: View {
   // Edit profile
   @State private var profileToEdit: BlockedProfiles? = nil
 
-  // Donation View
-  @State private var showDonationView = false
+  // Profile View
+  @State private var showUserProfileView = false
 
   // Emergency View
   @State private var showEmergencyView = false
@@ -52,6 +52,7 @@ struct HomeView: View {
 
   // UI States
   @State private var opacityValue = 1.0
+  @State private var showShopSheet = false
 
   var isBlocking: Bool {
     return strategyManager.isBlocking
@@ -75,11 +76,6 @@ struct HomeView: View {
         HStack(alignment: .center) {
           AppTitle()
           Spacer()
-          RoundedButton(
-            "Support",
-            action: {
-              showDonationView = true
-            }, iconName: "heart.fill")
         }
         .padding(.trailing, 16)
         .padding(.top, 16)
@@ -92,11 +88,13 @@ struct HomeView: View {
         }
 
         if !profiles.isEmpty {
-          BlockedSessionsHabitTracker(
-            sessions: recentCompletedSessions
+          // Top creature/score card first
+          TopStarsHeader(
+            recentCompletedSessions: recentCompletedSessions,
+            onStarTapped: { showShopSheet = true }
           )
-          .padding(.horizontal, 16)
 
+          // Profile carousel
           BlockedProfileCarousel(
             profiles: profiles,
             isBlocking: isBlocking,
@@ -123,6 +121,45 @@ struct HomeView: View {
               showEmergencyView = true
             },
           )
+
+          // Chat entry point between profile cards and 4 week activity
+          NavigationLink(destination: ChatView()) {
+            HStack(spacing: 12) {
+              Image(systemName: "bubble.left.and.bubble.right.fill")
+                .foregroundColor(.white)
+                .padding(8)
+                .background(Color.blue)
+                .clipShape(Circle())
+
+              VStack(alignment: .leading, spacing: 2) {
+                Text("Ask Foqus AI")
+                  .font(.headline)
+                Text("Get help, tips, and coaching in chat")
+                  .font(.subheadline)
+                  .foregroundColor(.secondary)
+              }
+
+              Spacer()
+              Image(systemName: "chevron.right")
+                .foregroundColor(.secondary)
+            }
+            .padding(16)
+            .background(
+              RoundedRectangle(cornerRadius: 16)
+                .fill(Color(UIColor.secondarySystemBackground))
+            )
+            .overlay(
+              RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+            )
+            .padding(.horizontal, 16)
+          }
+
+          // Weekly activity now at the bottom
+          BlockedSessionsHabitTracker(
+            sessions: recentCompletedSessions
+          )
+          .padding(.horizontal, 16)
         }
 
         VersionFooter(
@@ -201,8 +238,11 @@ struct HomeView: View {
         customView: strategyManager.customStrategyView
       )
     }
-    .sheet(isPresented: $showDonationView) {
-      SupportView()
+    .sheet(isPresented: $showUserProfileView) {
+      ProfileView()
+    }
+    .sheet(isPresented: $showShopSheet) {
+      ShopView()
     }
     .sheet(isPresented: $showEmergencyView) {
       EmergencyView()
@@ -212,6 +252,20 @@ struct HomeView: View {
       Button("OK", role: .cancel) { dismissAlert() }
     } message: {
       Text(alertMessage)
+    }
+    .fullScreenCover(
+      isPresented: Binding(
+        get: { strategyManager.isBlocking },
+        set: { presenting in
+          if !presenting {
+            strategyManager.toggleBlocking(context: context, activeProfile: nil)
+          }
+        }
+      )
+    ) {
+      ActiveSessionView()
+        .environmentObject(strategyManager)
+        .interactiveDismissDisabled(true)
     }
   }
 

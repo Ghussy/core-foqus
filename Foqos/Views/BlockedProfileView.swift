@@ -22,6 +22,7 @@ struct BlockedProfileView: View {
   @State private var enableAllowMode: Bool = false
   @State private var enableAllowModeDomain: Bool = false
   @State private var domains: [String] = []
+  @State private var deeplinkURL: String = ""
 
   @State private var physicalUnblockNFCTagId: String?
   @State private var physicalUnblockQRCodeId: String?
@@ -100,6 +101,7 @@ struct BlockedProfileView: View {
     _physicalUnblockQRCodeId = State(
       initialValue: profile?.physicalUnblockQRCodeId ?? nil
     )
+    _deeplinkURL = State(initialValue: profile?.deeplinkURL ?? "")
     _schedule = State(
       initialValue: profile?.schedule
         ?? BlockedProfileSchedule(
@@ -193,6 +195,15 @@ struct BlockedProfileView: View {
             buttonAction: { showingSchedulePicker = true },
             disabled: isBlocking
           )
+        }
+
+        Section("Deep Link") {
+          TextField("https://...", text: $deeplinkURL)
+            .keyboardType(.URL)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled(true)
+            .textContentType(.URL)
+            .disabled(isBlocking)
         }
 
         Section("Safeguards") {
@@ -466,7 +477,8 @@ struct BlockedProfileView: View {
           domains: domains,
           physicalUnblockNFCTagId: physicalUnblockNFCTagId,
           physicalUnblockQRCodeId: physicalUnblockQRCodeId,
-          schedule: schedule
+          schedule: schedule,
+          deeplinkURL: deeplinkURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : deeplinkURL
         )
 
         // Schedule restrictions
@@ -487,7 +499,8 @@ struct BlockedProfileView: View {
           domains: domains,
           physicalUnblockNFCTagId: physicalUnblockNFCTagId,
           physicalUnblockQRCodeId: physicalUnblockQRCodeId,
-          schedule: schedule
+          schedule: schedule,
+          deeplinkURL: deeplinkURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : deeplinkURL
         )
 
         // Schedule restrictions

@@ -6,6 +6,7 @@ let DONATE_URL = "https://buymeacoffee.com/softwarecuddler"  // You can replace 
 
 struct SupportView: View {
   @EnvironmentObject var donationManager: TipManager
+  @Environment(\.openURL) private var openURL
   @State private var stampScale: CGFloat = 0.1
   @State private var stampRotation: Double = 0
   @State private var stampOpacity: Double = 0.0
@@ -79,6 +80,28 @@ struct SupportView: View {
         }
       )
       .fadeInSlide(delay: 0.6)
+
+      // Test Gospel Library Deeplink
+      ActionButton(
+        title: "Test Gospel Library Link",
+        backgroundColor: .blue,
+        iconName: "book.fill",
+        isLoading: false,
+        action: {
+          // Example: Matthew 5:16 in English
+          let deeplink = URL(string: "gospellibrary://content/scriptures/nt/matt/5?id=p16&lang=eng#p16")!
+
+          if UIApplication.shared.canOpenURL(deeplink) {
+            UIApplication.shared.open(deeplink)
+          } else {
+            // HTTPS universal link fallback (will open in app if installed)
+            if let httpsURL = URL(string: "https://www.churchofjesuschrist.org/study/scriptures/nt/matt/5?lang=eng#p16") {
+              openURL(httpsURL)
+            }
+          }
+        }
+      )
+      .fadeInSlide(delay: 0.65)
     }
     .padding(.horizontal, 20)
   }

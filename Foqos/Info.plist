@@ -15,5 +15,22 @@
 		<string>fetch</string>
 		<string>processing</string>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>gospellibrary</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>c0re</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Foqus uses the microphone for realtime voice chat with the assistant.</string>
+	<key>RealtimeEphemeralKey</key>
+	<string></string>
 </dict>
 </plist>

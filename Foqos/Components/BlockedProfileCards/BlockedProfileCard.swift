@@ -77,7 +77,7 @@ struct BlockedProfileCard: View {
           }
         }
 
-        // Middle section - Strategy and apps info
+        // Middle section - Strategy and streak
         VStack(alignment: .leading, spacing: 16) {
           // Strategy and schedule side-by-side with divider
           HStack(spacing: 16) {
@@ -89,11 +89,9 @@ struct BlockedProfileCard: View {
             ProfileScheduleRow(schedule: profile.schedule)
           }
 
-          // Using the new ProfileStatsRow component
-          ProfileStatsRow(
-            selectedActivity: profile.selectedActivity,
-            sessionCount: profile.sessions.count,
-            domainsCount: profile.domains?.count ?? 0
+          // Streak display
+          ProfileStreakRow(
+            sessions: profile.sessions
           )
         }
 
