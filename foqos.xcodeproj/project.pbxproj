@@ -14,6 +14,7 @@
 		1240888C2E6D122C00530B3B /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 1240888B2E6D122C00530B3B /* Storage */; };
 		1240888E2E6D141500530B3B /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 1240888D2E6D141500530B3B /* Supabase */; };
 		124088C92E74E59C00530B3B /* RealtimeAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 124088C82E74E59C00530B3B /* RealtimeAPI */; };
+		124088CE2E754FB800530B3B /* MetaCodable in Frameworks */ = {isa = PBXBuildFile; productRef = 124088CD2E754FB800530B3B /* MetaCodable */; };
 		8017130B2DE6C78C00B77FE1 /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80DBF6132CB776D100EEA8A6 /* DeviceActivity.framework */; };
 		801713132DE6C78C00B77FE1 /* FoqosDeviceMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8017130A2DE6C78C00B77FE1 /* FoqosDeviceMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		803989B32CCC06D600E87F57 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803989B22CCC06D600E87F57 /* StoreKit.framework */; };
@@ -204,6 +205,7 @@
 				803989B32CCC06D600E87F57 /* StoreKit.framework in Frameworks */,
 				1240888C2E6D122C00530B3B /* Storage in Frameworks */,
 				124088862E6D122C00530B3B /* Functions in Frameworks */,
+				124088CE2E754FB800530B3B /* MetaCodable in Frameworks */,
 				1240888E2E6D141500530B3B /* Supabase in Frameworks */,
 				124088C92E74E59C00530B3B /* RealtimeAPI in Frameworks */,
 				1240888A2E6D122C00530B3B /* Realtime in Frameworks */,
@@ -339,6 +341,7 @@
 				1240888B2E6D122C00530B3B /* Storage */,
 				1240888D2E6D141500530B3B /* Supabase */,
 				124088C82E74E59C00530B3B /* RealtimeAPI */,
+				124088CD2E754FB800530B3B /* MetaCodable */,
 			);
 			productName = foqos;
 			productReference = 801B20952CB363A10073E9E2 /* foqos.app */;
@@ -473,6 +476,7 @@
 				8021D2462D61837E00A92114 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				124088782E6CFEDA00530B3B /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				124088C72E74E59C00530B3B /* XCRemoteSwiftPackageReference "swift-realtime-openai" */,
+				124088CC2E754FB700530B3B /* XCRemoteSwiftPackageReference "MetaCodable" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 801B20962CB363A10073E9E2 /* Products */;
@@ -1174,6 +1178,14 @@
 				kind = branch;
 			};
 		};
+		124088CC2E754FB700530B3B /* XCRemoteSwiftPackageReference "MetaCodable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyLab/MetaCodable.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		8021D2462D61837E00A92114 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/twostraws/CodeScanner";
@@ -1219,6 +1231,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 124088C72E74E59C00530B3B /* XCRemoteSwiftPackageReference "swift-realtime-openai" */;
 			productName = RealtimeAPI;
+		};
+		124088CD2E754FB800530B3B /* MetaCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 124088CC2E754FB700530B3B /* XCRemoteSwiftPackageReference "MetaCodable" */;
+			productName = MetaCodable;
 		};
 		80F674AA2D6185510056977F /* CodeScanner */ = {
 			isa = XCSwiftPackageProductDependency;
