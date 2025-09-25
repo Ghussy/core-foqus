@@ -10,7 +10,7 @@ struct MainTabView: View {
       Tab("Feed", systemImage: "newspaper", value: AppTab.feed) {
         NavigationStack { FeedView().navigationTitle("Feed") }
       }
-      Tab("Main", systemImage: "house.fill", value: AppTab.main) {
+      Tab("Plants", systemImage: "leaf.fill", value: AppTab.main) {
         NavigationStack { HomeView() }
       }
       Tab("Profile", systemImage: "person.crop.circle", value: AppTab.profile) {

@@ -73,12 +73,7 @@ struct HomeView: View {
   var body: some View {
     ScrollView(showsIndicators: false) {
       VStack(alignment: .leading, spacing: 30) {
-        HStack(alignment: .center) {
-          AppTitle()
-          Spacer()
-        }
-        .padding(.trailing, 16)
-        .padding(.top, 16)
+   
 
         if profiles.isEmpty {
           Welcome(onTap: {
@@ -94,33 +89,38 @@ struct HomeView: View {
             onStarTapped: { showShopSheet = true }
           )
 
-          // Profile carousel
-          BlockedProfileCarousel(
-            profiles: profiles,
-            isBlocking: isBlocking,
-            isBreakAvailable: isBreakAvailable,
-            isBreakActive: isBreakActive,
-            activeSessionProfileId: activeSessionProfileId,
-            elapsedTime: strategyManager.elapsedTime,
-            onStartTapped: { profile in
-              strategyButtonPress(profile)
+          // Plants header with Manage/Emergency button
+          SectionTitle(
+            "Plants",
+            buttonText: isBlocking ? "Emergency" : "Manage",
+            buttonAction: {
+              if isBlocking {
+                showEmergencyView = true
+              } else {
+                isProfileListPresent = true
+              }
             },
-            onStopTapped: { profile in
-              strategyButtonPress(profile)
-            },
-            onEditTapped: { profile in
-              profileToEdit = profile
-            },
-            onBreakTapped: { _ in
-              strategyManager.toggleBreak()
-            },
-            onManageTapped: {
-              isProfileListPresent = true
-            },
-            onEmergencyTapped: {
-              showEmergencyView = true
-            },
+            buttonIcon: isBlocking ? "exclamationmark.triangle.fill" : "leaf.fill"
           )
+          .padding(.horizontal, 16)
+
+          // Profile list
+          VStack(spacing: 16) {
+            ForEach(profiles) { profile in
+              BlockedProfileCard(
+                profile: profile,
+                isActive: profile.id == activeSessionProfileId,
+                isBreakAvailable: isBreakAvailable,
+                isBreakActive: isBreakActive,
+                elapsedTime: strategyManager.elapsedTime,
+                onStartTapped: { strategyButtonPress(profile) },
+                onStopTapped: { strategyButtonPress(profile) },
+                onEditTapped: { profileToEdit = profile },
+                onBreakTapped: { strategyManager.toggleBreak() }
+              )
+            }
+          }
+          .padding(.horizontal, 16)
 
           // Chat entry point between profile cards and 4 week activity
           NavigationLink(destination: ChatView()) {

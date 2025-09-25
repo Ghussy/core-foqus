@@ -69,9 +69,7 @@ struct ProfileTimerButton: View {
             icon: "play.fill",
             fullWidth: true,
             longPressEnabled: true
-          ) {
-            onStartTapped()
-          }
+        ) { onStartTapped() }
         }
       }
 
@@ -82,9 +80,7 @@ struct ProfileTimerButton: View {
           fullWidth: true,
           longPressEnabled: true,
           color: breakColor
-        ) {
-          onBreakTapped()
-        }
+        ) { onBreakTapped() }
       }
     }
   }

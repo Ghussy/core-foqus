@@ -29,6 +29,8 @@ struct GlassButton: View {
   @State private var isPressed = false
   @State private var progress: CGFloat = 0.0
   @State private var touchStartLocation: CGPoint = .zero
+  @State private var holdWorkItem: DispatchWorkItem? = nil
+  @State private var isCancelled: Bool = false
 
   private var longPressButton: some View {
     buttonContent
@@ -39,33 +41,54 @@ struct GlassButton: View {
       .simultaneousGesture(
         DragGesture(minimumDistance: 0)
           .onChanged { value in
-            if progress == 0.0 {  // capture where the touch started
+            if progress == 0.0 {
+              // Touch began
               touchStartLocation = value.startLocation
+              isCancelled = false
+              isPressed = true
+              withAnimation(.linear(duration: longPressDuration)) {
+                progress = 1.0
+              }
+
+              // Schedule hold completion
+              holdWorkItem?.cancel()
+              let workItem = DispatchWorkItem {
+                if isPressed && !isCancelled {
+                  UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                  action()
+                }
+                isPressed = false
+                withAnimation(.easeOut(duration: 0.2)) {
+                  progress = 0.0
+                }
+              }
+              holdWorkItem = workItem
+              DispatchQueue.main.asyncAfter(
+                deadline: .now() + longPressDuration,
+                execute: workItem
+              )
+            }
+
+            // Cancel if user moves too far (allow small drift)
+            let dx = value.translation.width
+            let dy = value.translation.height
+            if abs(dx) > 40 || abs(dy) > 40 {
+              isCancelled = true
+              isPressed = false
+              holdWorkItem?.cancel()
+              withAnimation(.easeOut(duration: 0.2)) {
+                progress = 0.0
+              }
             }
           }
-      )
-      .onLongPressGesture(
-        minimumDuration: longPressDuration,
-        maximumDistance: 50,
-        pressing: { pressing in
-          if pressing {
-            isPressed = true
-            withAnimation(.linear(duration: longPressDuration)) {
-              progress = 1.0
-            }
-          } else {
+          .onEnded { _ in
+            // Ended before threshold
+            holdWorkItem?.cancel()
             isPressed = false
             withAnimation(.easeOut(duration: 0.2)) {
               progress = 0.0
             }
           }
-        },
-        perform: {
-          UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-          action()
-          isPressed = false
-          progress = 0.0
-        }
       )
       .overlay(
         ZStack {

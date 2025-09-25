@@ -45,7 +45,6 @@ struct VersionFooter: View {
                     .foregroundColor(.secondary)
             }
 
-            // Removed external link button per request
         }
     }
     
